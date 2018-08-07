@@ -1,0 +1,31 @@
+{
+  "name": "webrtc-ring-to-forwarding",
+  "version": "1.0.0",
+  "description": "Example node.js application to implement call forwarding of WebRTC calls to a ring-to number",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxbone-workshop/webrtc-ring-to-forwarding.git"
+  },
+  "keywords": [
+    "drachtio",
+    "sip",
+    "webrtc",
+    "VoxOUT",
+    "VoxDID"
+  ],
+  "author": "Dave Horton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voxbone-workshop/webrtc-ring-to-forwarding/issues"
+  },
+  "homepage": "https://github.com/voxbone-workshop/webrtc-ring-to-forwarding#readme",
+  "dependencies": {
+    "config": "^2.0.1",
+    "drachtio-srf": "^4.3.4",
+    "pino": "^5.0.0"
+  }
+}
