@@ -1,0 +1,32 @@
+version: '3.0'
+
+networks:
+  voxout-forward:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.29.0.0/16
+
+services:
+
+  drachtio:
+    image: drachtio/drachtio-server:latest
+    command: drachtio --contact "sip:*;transport=udp" --loglevel info --sofia-loglevel 9 --mtu 4096
+    ports:
+      - "9022/tcp"
+      - "5060/udp"
+    networks:
+      voxout-forward:
+        ipv4_address: 172.29.0.2
+
+  nodejs:
+    image: node:8
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    command: npm start
+    networks:
+      voxout-forward:
+        ipv4_address: 172.29.0.12

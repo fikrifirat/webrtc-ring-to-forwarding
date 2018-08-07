@@ -4,6 +4,7 @@
   "description": "Example node.js application to implement call forwarding of WebRTC calls to a ring-to number",
   "main": "app.js",
   "scripts": {
+    "start": "npm install && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

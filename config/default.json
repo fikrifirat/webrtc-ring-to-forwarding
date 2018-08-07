@@ -1,6 +1,6 @@
 {
   "drachtio": {
-    "host": "127.0.0.1",
+    "host": "drachtio",
     "port": 9022,
     "secret": "cymru"
   }
