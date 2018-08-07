@@ -11,10 +11,10 @@ services:
 
   drachtio:
     image: drachtio/drachtio-server:latest
-    command: drachtio --contact "sip:*;transport=udp" --loglevel info --sofia-loglevel 9 --mtu 4096
+    command: drachtio --contact "sip:*;transport=udp" --external-ip <your-public-ip-here> --loglevel info --sofia-loglevel 9 --mtu 4096
     ports:
-      - "9022/tcp"
-      - "5060/udp"
+      - "9022:9022/tcp"
+      - "5060:5060/udp"
     networks:
       voxout-forward:
         ipv4_address: 172.29.0.2
