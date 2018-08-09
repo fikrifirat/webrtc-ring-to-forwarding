@@ -1,7 +1,0 @@
-{
-  "drachtio": {
-    "host": "drachtio",
-    "port": 9022,
-    "secret": "cymru"
-  }
-}

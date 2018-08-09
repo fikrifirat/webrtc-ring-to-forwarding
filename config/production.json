@@ -1,0 +1,14 @@
+{
+  "drachtio": {
+    "host": "drachtio",
+    "port": 9022,
+    "secret": "cymru"
+  },
+  "voxout": {
+    "auth": {
+      "username": "<your-voxout-username-here>",
+      "password": "<your-voxout-password-here>"      
+    },
+    "border-controller": "sip:81.201.82.250"
+  }
+}

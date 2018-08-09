@@ -11,7 +11,7 @@ services:
 
   drachtio:
     image: drachtio/drachtio-server:latest
-    command: drachtio --contact "sip:*;transport=udp" --external-ip <your-public-ip-here> --loglevel info --sofia-loglevel 9 --mtu 4096
+    command: drachtio --contact "sip:*;transport=udp" --external-ip <your-public-ip-here> --loglevel info --sofia-loglevel 3 --mtu 4096
     ports:
       - "9022:9022/tcp"
       - "5060:5060/udp"
