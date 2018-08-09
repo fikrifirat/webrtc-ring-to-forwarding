@@ -10,5 +10,7 @@
       "password": "<your-voxout-password-here>"      
     },
     "border-controller": "sip:81.201.82.250"
-  }
+  },
+  "http-callback": "<http://your.callback.address.here>",
+  "ring-to": "<your-ring-to-number-here-in-E164-format>"
 }

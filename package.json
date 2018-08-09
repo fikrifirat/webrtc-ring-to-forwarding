@@ -27,6 +27,7 @@
   "dependencies": {
     "config": "^2.0.1",
     "drachtio-srf": "^4.3.4",
-    "pino": "^5.0.0"
+    "pino": "^5.0.0",
+    "request": "^2.87.0"
   }
 }
