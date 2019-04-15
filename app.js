@@ -4,6 +4,7 @@ const logger = srf.locals.logger = require('pino')();
 const config = require('config');
 const validateCall = require('./lib/validate-call');
 const parseUri = Srf.parseUri;
+const request = require('request');
 
 // connect to the drachtio sip server
 srf.connect(config.get('drachtio'))
@@ -18,7 +19,10 @@ srf.use('invite', validateCall);
 srf.invite((req, res) => {
   const uri = parseUri(req.uri);
   const dest = `sip:${req.locals.calledNumber}@voxout.voxbone.com`;
+  const from = req.getParsedHeader('From');
+  const callerId = from.uri ? parseUri(from.uri).user : '';
 
+  logger.info("attempting a call from " + uri.user + " to:" + req.locals.calledNumber);
   srf.createB2BUA(req, res, dest, {
     proxy: config.get('voxout.border-controller'),
     auth: config.get('voxout.auth'),
@@ -28,6 +32,39 @@ srf.invite((req, res) => {
   })
     .then(({uas, uac}) => {
       logger.info('call connected');
+      const uri = parseUri(req.uri);
+      const from = req.getParsedHeader('From');
+      const callerId = from.uri ? parseUri(from.uri).user : '';
+      var d = new Date();
+      var n = d.toISOString();
+      var webhookUrl = config.get('http-callback');
+      if(req.locals.metadata.webhookUrl)
+      {
+          webhookUrl = req.locals.metadata.webhookUrl;
+      }
+      request.post(webhookUrl, {
+		json: true,
+    		body: {
+      			did: uri.user,
+      			callerId: callerId,
+    	  		callId: req.get('Call-ID'),
+			destination: req.locals.calledNumber,
+			connectedAt: n,
+			metadata: req.locals.metadata
+    			}
+  		}, (err, res, body) => {
+    			if (err) {
+      				logger.error(err, 'Error invoking callback, to url '+ webhookUrl);
+    			}
+    			//else if (body && body['ring-to']) {
+      			//	req.locals.calledNumber = body['ring-to'];
+      			//	logger.info('received ring-to number '+ req.locals.calledNumber );
+    			//}
+   	 		//else {
+     			// logger.info('callback did not supply ring-to, using default');
+    		//	}
+   	 	//next();
+  		});
 
       return setHandlers({uas, uac});
     })
